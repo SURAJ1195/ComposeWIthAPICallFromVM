@@ -1,0 +1,63 @@
+package com.example.irctconbordingstatus.component
+
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun InputField(
+    modifier: Modifier = Modifier,
+    valueState: MutableState<String>,
+    labelId:String,
+    enabled:Boolean,
+    isSingleLine:Boolean,
+    imeAction: ImeAction = ImeAction.Next,
+    onAction: KeyboardActions = KeyboardActions.Default
+){
+
+    OutlinedTextField(value = valueState.value,
+        onValueChange ={ valueState.value = it } ,
+        label = { Text(text = labelId) },
+
+        singleLine = isSingleLine,
+        textStyle = TextStyle(fontSize = 18.sp, color = Color(0xFF000000)),
+        modifier = modifier
+            .padding(bottom = 10.dp,start=50.dp,end = 50.dp)
+            .fillMaxWidth(),
+        enabled = enabled,
+        keyboardOptions = KeyboardOptions( imeAction = imeAction),
+        keyboardActions = onAction
+
+    )
+}
+@Composable
+fun NoteButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: ()-> Unit,
+    enable : Boolean =true
+){
+    Button(onClick = onClick,
+        shape = CircleShape,
+        enabled = enable,
+        modifier = modifier) {
+        Text(text = text)
+    }
+}
